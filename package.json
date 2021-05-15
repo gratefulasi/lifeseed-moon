@@ -5,7 +5,7 @@
   "author": "Zon",
   "license": "MIT",
   "scripts": {
-    "start": "keystone-next",
+    "start": "keystone-next --max_old_space_size=2560",
     "prod": "keystone-next",
     "dev": "keystone-next",
     "seed-data": "keystone-next --seed-data"

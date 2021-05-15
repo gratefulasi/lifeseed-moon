@@ -5,6 +5,8 @@
   "author": "Zon",
   "license": "MIT",
   "scripts": {
+    "start": "keystone-next",
+    "prod": "keystone-next",
     "dev": "keystone-next",
     "seed-data": "keystone-next --seed-data"
   },

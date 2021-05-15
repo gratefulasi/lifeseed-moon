@@ -1,0 +1,128 @@
+datasource postgresql {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "node_modules/.prisma/client"
+}
+
+model BasketItem {
+  id         Int       @id @default(autoincrement())
+  quantity   Int?
+  present    Present?  @relation("BasketItempresent", fields: [presentId], references: [id])
+  presentId  Int?      @map("present")
+  lifeseed   Lifeseed? @relation("BasketItemlifeseed", fields: [lifeseedId], references: [id])
+  lifeseedId Int?      @map("lifeseed")
+
+  @@index([presentId])
+  @@index([lifeseedId])
+}
+
+model Lifeseed {
+  id                      Int          @id @default(autoincrement())
+  name                    String?
+  email                   String?      @unique
+  password                String?
+  passwordResetToken      String?
+  passwordResetIssuedAt   DateTime?
+  passwordResetRedeemedAt DateTime?
+  basket                  BasketItem[] @relation("BasketItemlifeseed")
+  role                    Role?        @relation("Lifeseedrole", fields: [roleId], references: [id])
+  roleId                  Int?         @map("role")
+  lifetree                Lifetree?    @relation("Lifeseedlifetree", fields: [lifetreeId], references: [id])
+  lifetreeId              Int?         @map("lifetree")
+  loves                   Love[]       @relation("Lovelifeseed")
+  packages                Package[]    @relation("Packagelifeseed")
+  presents                Present[]    @relation("Presentlifeseed")
+
+  @@index([roleId])
+  @@index([lifetreeId])
+}
+
+model Lifetree {
+  id        Int       @id @default(autoincrement())
+  name      String?
+  body      String?
+  image     String?
+  status    String?
+  latitude  String?
+  longitude String?
+  lifeseed  Lifeseed? @relation("Lifeseedlifetree")
+}
+
+model CloudinaryImage {
+  id      Int     @id @default(autoincrement())
+  image   Json?
+  altText String?
+}
+
+model Love {
+  id           Int       @id @default(autoincrement())
+  creationTime String?
+  lifeseed     Lifeseed? @relation("Lovelifeseed", fields: [lifeseedId], references: [id])
+  lifeseedId   Int?      @map("lifeseed")
+  present      Present?  @relation("Lovepresent", fields: [presentId], references: [id])
+  presentId    Int?      @map("present")
+
+  @@index([lifeseedId])
+  @@index([presentId])
+}
+
+model Package {
+  id         Int           @id @default(autoincrement())
+  total      Int?
+  charge     String?
+  items      PackageItem[] @relation("PackageItempackage")
+  lifeseed   Lifeseed?     @relation("Packagelifeseed", fields: [lifeseedId], references: [id])
+  lifeseedId Int?          @map("lifeseed")
+
+  @@index([lifeseedId])
+}
+
+model PackageItem {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  body      String?
+  price     Int?
+  quantity  Int?
+  package   Package? @relation("PackageItempackage", fields: [packageId], references: [id])
+  packageId Int?     @map("package")
+
+  @@index([packageId])
+}
+
+model Present {
+  id                      Int          @id @default(autoincrement())
+  name                    String?
+  body                    String?
+  image                   String?
+  creationTime            String?
+  status                  String?
+  type                    String?
+  price                   Int?
+  comment                 Present?     @relation("Presentcomment", fields: [commentId], references: [id])
+  commentId               Int?         @map("comment")
+  comments                Present[]    @relation("Presentcomment")
+  loves                   Love[]       @relation("Lovepresent")
+  lifeseed                Lifeseed?    @relation("Presentlifeseed", fields: [lifeseedId], references: [id])
+  lifeseedId              Int?         @map("lifeseed")
+  from_BasketItem_present BasketItem[] @relation("BasketItempresent")
+
+  @@index([commentId])
+  @@index([lifeseedId])
+}
+
+model Role {
+  id                   Int        @id @default(autoincrement())
+  name                 String?
+  canManagePresents    Boolean?
+  canManageComments    Boolean?
+  canSeeOtherLifeseeds Boolean?
+  canManageLifeseeds   Boolean?
+  canManageRoles       Boolean?
+  canManageBasket      Boolean?
+  canManagePackages    Boolean?
+  assignedTo           Lifeseed[] @relation("Lifeseedrole")
+}

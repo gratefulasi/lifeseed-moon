@@ -1,0 +1,2137 @@
+input PresentRelateToOneInput {
+  create: PresentCreateInput
+  connect: PresentWhereUniqueInput
+  disconnect: PresentWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input LifeseedRelateToOneInput {
+  create: LifeseedCreateInput
+  connect: LifeseedWhereUniqueInput
+  disconnect: LifeseedWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+"""
+ A keystone list
+"""
+type BasketItem {
+  id: ID!
+  quantity: Int
+  present: Present
+  lifeseed: Lifeseed
+}
+
+input BasketItemWhereInput {
+  AND: [BasketItemWhereInput]
+  OR: [BasketItemWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  quantity: Int
+  quantity_not: Int
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  quantity_in: [Int]
+  quantity_not_in: [Int]
+  present: PresentWhereInput
+  present_is_null: Boolean
+  lifeseed: LifeseedWhereInput
+  lifeseed_is_null: Boolean
+}
+
+input BasketItemWhereUniqueInput {
+  id: ID!
+}
+
+enum SortBasketItemsBy {
+  id_ASC
+  id_DESC
+  quantity_ASC
+  quantity_DESC
+}
+
+input BasketItemUpdateInput {
+  quantity: Int
+  present: PresentRelateToOneInput
+  lifeseed: LifeseedRelateToOneInput
+}
+
+input BasketItemsUpdateInput {
+  id: ID!
+  data: BasketItemUpdateInput
+}
+
+input BasketItemCreateInput {
+  quantity: Int
+  present: PresentRelateToOneInput
+  lifeseed: LifeseedRelateToOneInput
+}
+
+input BasketItemsCreateInput {
+  data: BasketItemCreateInput
+}
+
+input BasketItemRelateToManyInput {
+  create: [BasketItemCreateInput]
+  connect: [BasketItemWhereUniqueInput]
+  disconnect: [BasketItemWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input RoleRelateToOneInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+  disconnect: RoleWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input LifetreeRelateToOneInput {
+  create: LifetreeCreateInput
+  connect: LifetreeWhereUniqueInput
+  disconnect: LifetreeWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input LoveRelateToManyInput {
+  create: [LoveCreateInput]
+  connect: [LoveWhereUniqueInput]
+  disconnect: [LoveWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input PackageRelateToManyInput {
+  create: [PackageCreateInput]
+  connect: [PackageWhereUniqueInput]
+  disconnect: [PackageWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input PresentRelateToManyInput {
+  create: [PresentCreateInput]
+  connect: [PresentWhereUniqueInput]
+  disconnect: [PresentWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+"""
+ A keystone list
+"""
+type Lifeseed {
+  id: ID!
+  name: String
+  email: String
+  password_is_set: Boolean
+  basket(
+    where: BasketItemWhereInput
+    search: String
+    sortBy: [SortBasketItemsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [BasketItem!]!
+  _basketMeta(
+    where: BasketItemWhereInput
+    search: String
+    sortBy: [SortBasketItemsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  role: Role
+  lifetree: Lifetree
+  loves(
+    where: LoveWhereInput
+    search: String
+    sortBy: [SortLovesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Love!]!
+  _lovesMeta(
+    where: LoveWhereInput
+    search: String
+    sortBy: [SortLovesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  packages(
+    where: PackageWhereInput
+    search: String
+    sortBy: [SortPackagesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Package!]!
+  _packagesMeta(
+    where: PackageWhereInput
+    search: String
+    sortBy: [SortPackagesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  presents(
+    where: PresentWhereInput
+    search: String
+    sortBy: [SortPresentsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Present!]!
+  _presentsMeta(
+    where: PresentWhereInput
+    search: String
+    sortBy: [SortPresentsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  passwordResetToken_is_set: Boolean
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
+}
+
+input LifeseedWhereInput {
+  AND: [LifeseedWhereInput]
+  OR: [LifeseedWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  email: String
+  email_not: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  email_i: String
+  email_not_i: String
+  email_contains_i: String
+  email_not_contains_i: String
+  email_starts_with_i: String
+  email_not_starts_with_i: String
+  email_ends_with_i: String
+  email_not_ends_with_i: String
+  email_in: [String]
+  email_not_in: [String]
+  password_is_set: Boolean
+
+  """
+   condition must be true for all nodes
+  """
+  basket_every: BasketItemWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  basket_some: BasketItemWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  basket_none: BasketItemWhereInput
+  role: RoleWhereInput
+  role_is_null: Boolean
+  lifetree: LifetreeWhereInput
+  lifetree_is_null: Boolean
+
+  """
+   condition must be true for all nodes
+  """
+  loves_every: LoveWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  loves_some: LoveWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  loves_none: LoveWhereInput
+
+  """
+   condition must be true for all nodes
+  """
+  packages_every: PackageWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  packages_some: PackageWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  packages_none: PackageWhereInput
+
+  """
+   condition must be true for all nodes
+  """
+  presents_every: PresentWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  presents_some: PresentWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  presents_none: PresentWhereInput
+  passwordResetToken_is_set: Boolean
+  passwordResetIssuedAt: String
+  passwordResetIssuedAt_not: String
+  passwordResetIssuedAt_lt: String
+  passwordResetIssuedAt_lte: String
+  passwordResetIssuedAt_gt: String
+  passwordResetIssuedAt_gte: String
+  passwordResetIssuedAt_in: [String]
+  passwordResetIssuedAt_not_in: [String]
+  passwordResetRedeemedAt: String
+  passwordResetRedeemedAt_not: String
+  passwordResetRedeemedAt_lt: String
+  passwordResetRedeemedAt_lte: String
+  passwordResetRedeemedAt_gt: String
+  passwordResetRedeemedAt_gte: String
+  passwordResetRedeemedAt_in: [String]
+  passwordResetRedeemedAt_not_in: [String]
+}
+
+input LifeseedWhereUniqueInput {
+  id: ID!
+}
+
+enum SortLifeseedsBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+  passwordResetIssuedAt_ASC
+  passwordResetIssuedAt_DESC
+  passwordResetRedeemedAt_ASC
+  passwordResetRedeemedAt_DESC
+}
+
+input LifeseedUpdateInput {
+  name: String
+  email: String
+  password: String
+  basket: BasketItemRelateToManyInput
+  role: RoleRelateToOneInput
+  lifetree: LifetreeRelateToOneInput
+  loves: LoveRelateToManyInput
+  packages: PackageRelateToManyInput
+  presents: PresentRelateToManyInput
+  passwordResetToken: String
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
+}
+
+input LifeseedsUpdateInput {
+  id: ID!
+  data: LifeseedUpdateInput
+}
+
+input LifeseedCreateInput {
+  name: String
+  email: String
+  password: String
+  basket: BasketItemRelateToManyInput
+  role: RoleRelateToOneInput
+  lifetree: LifetreeRelateToOneInput
+  loves: LoveRelateToManyInput
+  packages: PackageRelateToManyInput
+  presents: PresentRelateToManyInput
+  passwordResetToken: String
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
+}
+
+input LifeseedsCreateInput {
+  data: LifeseedCreateInput
+}
+
+"""
+ A keystone list
+"""
+type Lifetree {
+  id: ID!
+  name: String
+  body: String
+  image: String
+  status: String
+  latitude: String
+  longitude: String
+  lifeseed: Lifeseed
+}
+
+input LifetreeWhereInput {
+  AND: [LifetreeWhereInput]
+  OR: [LifetreeWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  body: String
+  body_not: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
+  body_i: String
+  body_not_i: String
+  body_contains_i: String
+  body_not_contains_i: String
+  body_starts_with_i: String
+  body_not_starts_with_i: String
+  body_ends_with_i: String
+  body_not_ends_with_i: String
+  body_in: [String]
+  body_not_in: [String]
+  image: String
+  image_not: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  image_i: String
+  image_not_i: String
+  image_contains_i: String
+  image_not_contains_i: String
+  image_starts_with_i: String
+  image_not_starts_with_i: String
+  image_ends_with_i: String
+  image_not_ends_with_i: String
+  image_in: [String]
+  image_not_in: [String]
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  latitude: String
+  latitude_not: String
+  latitude_contains: String
+  latitude_not_contains: String
+  latitude_starts_with: String
+  latitude_not_starts_with: String
+  latitude_ends_with: String
+  latitude_not_ends_with: String
+  latitude_i: String
+  latitude_not_i: String
+  latitude_contains_i: String
+  latitude_not_contains_i: String
+  latitude_starts_with_i: String
+  latitude_not_starts_with_i: String
+  latitude_ends_with_i: String
+  latitude_not_ends_with_i: String
+  latitude_in: [String]
+  latitude_not_in: [String]
+  longitude: String
+  longitude_not: String
+  longitude_contains: String
+  longitude_not_contains: String
+  longitude_starts_with: String
+  longitude_not_starts_with: String
+  longitude_ends_with: String
+  longitude_not_ends_with: String
+  longitude_i: String
+  longitude_not_i: String
+  longitude_contains_i: String
+  longitude_not_contains_i: String
+  longitude_starts_with_i: String
+  longitude_not_starts_with_i: String
+  longitude_ends_with_i: String
+  longitude_not_ends_with_i: String
+  longitude_in: [String]
+  longitude_not_in: [String]
+  lifeseed: LifeseedWhereInput
+  lifeseed_is_null: Boolean
+}
+
+input LifetreeWhereUniqueInput {
+  id: ID!
+}
+
+enum SortLifetreesBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  body_ASC
+  body_DESC
+  image_ASC
+  image_DESC
+  status_ASC
+  status_DESC
+  latitude_ASC
+  latitude_DESC
+  longitude_ASC
+  longitude_DESC
+}
+
+input LifetreeUpdateInput {
+  name: String
+  body: String
+  image: String
+  status: String
+  latitude: String
+  longitude: String
+  lifeseed: LifeseedRelateToOneInput
+}
+
+input LifetreesUpdateInput {
+  id: ID!
+  data: LifetreeUpdateInput
+}
+
+input LifetreeCreateInput {
+  name: String
+  body: String
+  image: String
+  status: String
+  latitude: String
+  longitude: String
+  lifeseed: LifeseedRelateToOneInput
+}
+
+input LifetreesCreateInput {
+  data: LifetreeCreateInput
+}
+
+type CloudinaryImage_File {
+  id: ID
+  path: String
+  filename: String
+  originalFilename: String
+  mimetype: String
+  encoding: String
+  publicUrl: String
+  publicUrlTransformed(transformation: CloudinaryImageFormat): String
+}
+
+"""
+Mirrors the formatting options [Cloudinary provides](https://cloudinary.com/documentation/image_transformation_reference).
+All options are strings as they ultimately end up in a URL.
+"""
+input CloudinaryImageFormat {
+  """
+   Rewrites the filename to be this pretty string. Do not include `/` or `.`
+  """
+  prettyName: String
+  width: String
+  height: String
+  crop: String
+  aspect_ratio: String
+  gravity: String
+  zoom: String
+  x: String
+  y: String
+  format: String
+  fetch_format: String
+  quality: String
+  radius: String
+  angle: String
+  effect: String
+  opacity: String
+  border: String
+  background: String
+  overlay: String
+  underlay: String
+  default_image: String
+  delay: String
+  color: String
+  color_space: String
+  dpr: String
+  page: String
+  density: String
+  flags: String
+  transformation: String
+}
+
+"""
+ A keystone list
+"""
+type CloudinaryImage {
+  id: ID!
+  image: CloudinaryImage_File
+  altText: String
+}
+
+input CloudinaryImageWhereInput {
+  AND: [CloudinaryImageWhereInput]
+  OR: [CloudinaryImageWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  image: String
+  image_not: String
+  image_in: [String]
+  image_not_in: [String]
+  altText: String
+  altText_not: String
+  altText_contains: String
+  altText_not_contains: String
+  altText_starts_with: String
+  altText_not_starts_with: String
+  altText_ends_with: String
+  altText_not_ends_with: String
+  altText_i: String
+  altText_not_i: String
+  altText_contains_i: String
+  altText_not_contains_i: String
+  altText_starts_with_i: String
+  altText_not_starts_with_i: String
+  altText_ends_with_i: String
+  altText_not_ends_with_i: String
+  altText_in: [String]
+  altText_not_in: [String]
+}
+
+input CloudinaryImageWhereUniqueInput {
+  id: ID!
+}
+
+enum SortCloudinaryImagesBy {
+  id_ASC
+  id_DESC
+  altText_ASC
+  altText_DESC
+}
+
+input CloudinaryImageUpdateInput {
+  image: Upload
+  altText: String
+}
+
+input CloudinaryImagesUpdateInput {
+  id: ID!
+  data: CloudinaryImageUpdateInput
+}
+
+input CloudinaryImageCreateInput {
+  image: Upload
+  altText: String
+}
+
+input CloudinaryImagesCreateInput {
+  data: CloudinaryImageCreateInput
+}
+
+"""
+ A keystone list
+"""
+type Love {
+  id: ID!
+  creationTime: String
+  lifeseed: Lifeseed
+  present: Present
+}
+
+input LoveWhereInput {
+  AND: [LoveWhereInput]
+  OR: [LoveWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  creationTime: String
+  creationTime_not: String
+  creationTime_contains: String
+  creationTime_not_contains: String
+  creationTime_starts_with: String
+  creationTime_not_starts_with: String
+  creationTime_ends_with: String
+  creationTime_not_ends_with: String
+  creationTime_i: String
+  creationTime_not_i: String
+  creationTime_contains_i: String
+  creationTime_not_contains_i: String
+  creationTime_starts_with_i: String
+  creationTime_not_starts_with_i: String
+  creationTime_ends_with_i: String
+  creationTime_not_ends_with_i: String
+  creationTime_in: [String]
+  creationTime_not_in: [String]
+  lifeseed: LifeseedWhereInput
+  lifeseed_is_null: Boolean
+  present: PresentWhereInput
+  present_is_null: Boolean
+}
+
+input LoveWhereUniqueInput {
+  id: ID!
+}
+
+enum SortLovesBy {
+  id_ASC
+  id_DESC
+  creationTime_ASC
+  creationTime_DESC
+}
+
+input LoveUpdateInput {
+  creationTime: String
+  lifeseed: LifeseedRelateToOneInput
+  present: PresentRelateToOneInput
+}
+
+input LovesUpdateInput {
+  id: ID!
+  data: LoveUpdateInput
+}
+
+input LoveCreateInput {
+  creationTime: String
+  lifeseed: LifeseedRelateToOneInput
+  present: PresentRelateToOneInput
+}
+
+input LovesCreateInput {
+  data: LoveCreateInput
+}
+
+input PackageItemRelateToManyInput {
+  create: [PackageItemCreateInput]
+  connect: [PackageItemWhereUniqueInput]
+  disconnect: [PackageItemWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+"""
+ A keystone list
+"""
+type Package {
+  id: ID!
+  label: String
+  total: Int
+  items(
+    where: PackageItemWhereInput
+    search: String
+    sortBy: [SortPackageItemsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [PackageItem!]!
+  _itemsMeta(
+    where: PackageItemWhereInput
+    search: String
+    sortBy: [SortPackageItemsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  lifeseed: Lifeseed
+  charge: String
+}
+
+input PackageWhereInput {
+  AND: [PackageWhereInput]
+  OR: [PackageWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  total: Int
+  total_not: Int
+  total_lt: Int
+  total_lte: Int
+  total_gt: Int
+  total_gte: Int
+  total_in: [Int]
+  total_not_in: [Int]
+
+  """
+   condition must be true for all nodes
+  """
+  items_every: PackageItemWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  items_some: PackageItemWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  items_none: PackageItemWhereInput
+  lifeseed: LifeseedWhereInput
+  lifeseed_is_null: Boolean
+  charge: String
+  charge_not: String
+  charge_contains: String
+  charge_not_contains: String
+  charge_starts_with: String
+  charge_not_starts_with: String
+  charge_ends_with: String
+  charge_not_ends_with: String
+  charge_i: String
+  charge_not_i: String
+  charge_contains_i: String
+  charge_not_contains_i: String
+  charge_starts_with_i: String
+  charge_not_starts_with_i: String
+  charge_ends_with_i: String
+  charge_not_ends_with_i: String
+  charge_in: [String]
+  charge_not_in: [String]
+}
+
+input PackageWhereUniqueInput {
+  id: ID!
+}
+
+enum SortPackagesBy {
+  id_ASC
+  id_DESC
+  total_ASC
+  total_DESC
+  charge_ASC
+  charge_DESC
+}
+
+input PackageUpdateInput {
+  total: Int
+  items: PackageItemRelateToManyInput
+  lifeseed: LifeseedRelateToOneInput
+  charge: String
+}
+
+input PackagesUpdateInput {
+  id: ID!
+  data: PackageUpdateInput
+}
+
+input PackageCreateInput {
+  total: Int
+  items: PackageItemRelateToManyInput
+  lifeseed: LifeseedRelateToOneInput
+  charge: String
+}
+
+input PackagesCreateInput {
+  data: PackageCreateInput
+}
+
+input PackageRelateToOneInput {
+  create: PackageCreateInput
+  connect: PackageWhereUniqueInput
+  disconnect: PackageWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+"""
+ A keystone list
+"""
+type PackageItem {
+  id: ID!
+  name: String
+  body: String
+  price: Int
+  quantity: Int
+  package: Package
+}
+
+input PackageItemWhereInput {
+  AND: [PackageItemWhereInput]
+  OR: [PackageItemWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  body: String
+  body_not: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
+  body_i: String
+  body_not_i: String
+  body_contains_i: String
+  body_not_contains_i: String
+  body_starts_with_i: String
+  body_not_starts_with_i: String
+  body_ends_with_i: String
+  body_not_ends_with_i: String
+  body_in: [String]
+  body_not_in: [String]
+  price: Int
+  price_not: Int
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  price_in: [Int]
+  price_not_in: [Int]
+  quantity: Int
+  quantity_not: Int
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  quantity_in: [Int]
+  quantity_not_in: [Int]
+  package: PackageWhereInput
+  package_is_null: Boolean
+}
+
+input PackageItemWhereUniqueInput {
+  id: ID!
+}
+
+enum SortPackageItemsBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  body_ASC
+  body_DESC
+  price_ASC
+  price_DESC
+  quantity_ASC
+  quantity_DESC
+}
+
+input PackageItemUpdateInput {
+  name: String
+  body: String
+  price: Int
+  quantity: Int
+  package: PackageRelateToOneInput
+}
+
+input PackageItemsUpdateInput {
+  id: ID!
+  data: PackageItemUpdateInput
+}
+
+input PackageItemCreateInput {
+  name: String
+  body: String
+  price: Int
+  quantity: Int
+  package: PackageRelateToOneInput
+}
+
+input PackageItemsCreateInput {
+  data: PackageItemCreateInput
+}
+
+"""
+ A keystone list
+"""
+type Present {
+  id: ID!
+  name: String
+  body: String
+  comment: Present
+  comments(
+    where: PresentWhereInput
+    search: String
+    sortBy: [SortPresentsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Present!]!
+  _commentsMeta(
+    where: PresentWhereInput
+    search: String
+    sortBy: [SortPresentsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  loves(
+    where: LoveWhereInput
+    search: String
+    sortBy: [SortLovesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Love!]!
+  _lovesMeta(
+    where: LoveWhereInput
+    search: String
+    sortBy: [SortLovesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  image: String
+  creationTime: String
+  status: String
+  type: String
+  price: Int
+  lifeseed: Lifeseed
+}
+
+input PresentWhereInput {
+  AND: [PresentWhereInput]
+  OR: [PresentWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  body: String
+  body_not: String
+  body_contains: String
+  body_not_contains: String
+  body_starts_with: String
+  body_not_starts_with: String
+  body_ends_with: String
+  body_not_ends_with: String
+  body_i: String
+  body_not_i: String
+  body_contains_i: String
+  body_not_contains_i: String
+  body_starts_with_i: String
+  body_not_starts_with_i: String
+  body_ends_with_i: String
+  body_not_ends_with_i: String
+  body_in: [String]
+  body_not_in: [String]
+  comment: PresentWhereInput
+  comment_is_null: Boolean
+
+  """
+   condition must be true for all nodes
+  """
+  comments_every: PresentWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  comments_some: PresentWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  comments_none: PresentWhereInput
+
+  """
+   condition must be true for all nodes
+  """
+  loves_every: LoveWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  loves_some: LoveWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  loves_none: LoveWhereInput
+  image: String
+  image_not: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  image_i: String
+  image_not_i: String
+  image_contains_i: String
+  image_not_contains_i: String
+  image_starts_with_i: String
+  image_not_starts_with_i: String
+  image_ends_with_i: String
+  image_not_ends_with_i: String
+  image_in: [String]
+  image_not_in: [String]
+  creationTime: String
+  creationTime_not: String
+  creationTime_contains: String
+  creationTime_not_contains: String
+  creationTime_starts_with: String
+  creationTime_not_starts_with: String
+  creationTime_ends_with: String
+  creationTime_not_ends_with: String
+  creationTime_i: String
+  creationTime_not_i: String
+  creationTime_contains_i: String
+  creationTime_not_contains_i: String
+  creationTime_starts_with_i: String
+  creationTime_not_starts_with_i: String
+  creationTime_ends_with_i: String
+  creationTime_not_ends_with_i: String
+  creationTime_in: [String]
+  creationTime_not_in: [String]
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  type: String
+  type_not: String
+  type_in: [String]
+  type_not_in: [String]
+  price: Int
+  price_not: Int
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  price_in: [Int]
+  price_not_in: [Int]
+  lifeseed: LifeseedWhereInput
+  lifeseed_is_null: Boolean
+}
+
+input PresentWhereUniqueInput {
+  id: ID!
+}
+
+enum SortPresentsBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  body_ASC
+  body_DESC
+  image_ASC
+  image_DESC
+  creationTime_ASC
+  creationTime_DESC
+  status_ASC
+  status_DESC
+  type_ASC
+  type_DESC
+  price_ASC
+  price_DESC
+}
+
+input PresentUpdateInput {
+  name: String
+  body: String
+  comment: PresentRelateToOneInput
+  comments: PresentRelateToManyInput
+  loves: LoveRelateToManyInput
+  image: String
+  creationTime: String
+  status: String
+  type: String
+  price: Int
+  lifeseed: LifeseedRelateToOneInput
+}
+
+input PresentsUpdateInput {
+  id: ID!
+  data: PresentUpdateInput
+}
+
+input PresentCreateInput {
+  name: String
+  body: String
+  comment: PresentRelateToOneInput
+  comments: PresentRelateToManyInput
+  loves: LoveRelateToManyInput
+  image: String
+  creationTime: String
+  status: String
+  type: String
+  price: Int
+  lifeseed: LifeseedRelateToOneInput
+}
+
+input PresentsCreateInput {
+  data: PresentCreateInput
+}
+
+input LifeseedRelateToManyInput {
+  create: [LifeseedCreateInput]
+  connect: [LifeseedWhereUniqueInput]
+  disconnect: [LifeseedWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+"""
+ A keystone list
+"""
+type Role {
+  id: ID!
+  name: String
+  canManagePresents: Boolean
+  canManageComments: Boolean
+  canSeeOtherLifeseeds: Boolean
+  canManageLifeseeds: Boolean
+  canManageRoles: Boolean
+  canManageBasket: Boolean
+  canManagePackages: Boolean
+  assignedTo(
+    where: LifeseedWhereInput
+    search: String
+    sortBy: [SortLifeseedsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Lifeseed!]!
+  _assignedToMeta(
+    where: LifeseedWhereInput
+    search: String
+    sortBy: [SortLifeseedsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+}
+
+input RoleWhereInput {
+  AND: [RoleWhereInput]
+  OR: [RoleWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  canManagePresents: Boolean
+  canManagePresents_not: Boolean
+  canManageComments: Boolean
+  canManageComments_not: Boolean
+  canSeeOtherLifeseeds: Boolean
+  canSeeOtherLifeseeds_not: Boolean
+  canManageLifeseeds: Boolean
+  canManageLifeseeds_not: Boolean
+  canManageRoles: Boolean
+  canManageRoles_not: Boolean
+  canManageBasket: Boolean
+  canManageBasket_not: Boolean
+  canManagePackages: Boolean
+  canManagePackages_not: Boolean
+
+  """
+   condition must be true for all nodes
+  """
+  assignedTo_every: LifeseedWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  assignedTo_some: LifeseedWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  assignedTo_none: LifeseedWhereInput
+}
+
+input RoleWhereUniqueInput {
+  id: ID!
+}
+
+enum SortRolesBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  canManagePresents_ASC
+  canManagePresents_DESC
+  canManageComments_ASC
+  canManageComments_DESC
+  canSeeOtherLifeseeds_ASC
+  canSeeOtherLifeseeds_DESC
+  canManageLifeseeds_ASC
+  canManageLifeseeds_DESC
+  canManageRoles_ASC
+  canManageRoles_DESC
+  canManageBasket_ASC
+  canManageBasket_DESC
+  canManagePackages_ASC
+  canManagePackages_DESC
+}
+
+input RoleUpdateInput {
+  name: String
+  canManagePresents: Boolean
+  canManageComments: Boolean
+  canSeeOtherLifeseeds: Boolean
+  canManageLifeseeds: Boolean
+  canManageRoles: Boolean
+  canManageBasket: Boolean
+  canManagePackages: Boolean
+  assignedTo: LifeseedRelateToManyInput
+}
+
+input RolesUpdateInput {
+  id: ID!
+  data: RoleUpdateInput
+}
+
+input RoleCreateInput {
+  name: String
+  canManagePresents: Boolean
+  canManageComments: Boolean
+  canSeeOtherLifeseeds: Boolean
+  canManageLifeseeds: Boolean
+  canManageRoles: Boolean
+  canManageBasket: Boolean
+  canManagePackages: Boolean
+  assignedTo: LifeseedRelateToManyInput
+}
+
+input RolesCreateInput {
+  data: RoleCreateInput
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+  @specifiedBy(
+    url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf"
+  )
+
+type _QueryMeta {
+  count: Int
+}
+
+type Mutation {
+  """
+   Create a single BasketItem item.
+  """
+  createBasketItem(data: BasketItemCreateInput): BasketItem
+
+  """
+   Create multiple BasketItem items.
+  """
+  createBasketItems(data: [BasketItemsCreateInput]): [BasketItem]
+
+  """
+   Update a single BasketItem item by ID.
+  """
+  updateBasketItem(id: ID!, data: BasketItemUpdateInput): BasketItem
+
+  """
+   Update multiple BasketItem items by ID.
+  """
+  updateBasketItems(data: [BasketItemsUpdateInput]): [BasketItem]
+
+  """
+   Delete a single BasketItem item by ID.
+  """
+  deleteBasketItem(id: ID!): BasketItem
+
+  """
+   Delete multiple BasketItem items by ID.
+  """
+  deleteBasketItems(ids: [ID!]): [BasketItem]
+
+  """
+   Create a single Lifeseed item.
+  """
+  createLifeseed(data: LifeseedCreateInput): Lifeseed
+
+  """
+   Create multiple Lifeseed items.
+  """
+  createLifeseeds(data: [LifeseedsCreateInput]): [Lifeseed]
+
+  """
+   Update a single Lifeseed item by ID.
+  """
+  updateLifeseed(id: ID!, data: LifeseedUpdateInput): Lifeseed
+
+  """
+   Update multiple Lifeseed items by ID.
+  """
+  updateLifeseeds(data: [LifeseedsUpdateInput]): [Lifeseed]
+
+  """
+   Delete a single Lifeseed item by ID.
+  """
+  deleteLifeseed(id: ID!): Lifeseed
+
+  """
+   Delete multiple Lifeseed items by ID.
+  """
+  deleteLifeseeds(ids: [ID!]): [Lifeseed]
+
+  """
+   Create a single Lifetree item.
+  """
+  createLifetree(data: LifetreeCreateInput): Lifetree
+
+  """
+   Create multiple Lifetree items.
+  """
+  createLifetrees(data: [LifetreesCreateInput]): [Lifetree]
+
+  """
+   Update a single Lifetree item by ID.
+  """
+  updateLifetree(id: ID!, data: LifetreeUpdateInput): Lifetree
+
+  """
+   Update multiple Lifetree items by ID.
+  """
+  updateLifetrees(data: [LifetreesUpdateInput]): [Lifetree]
+
+  """
+   Delete a single Lifetree item by ID.
+  """
+  deleteLifetree(id: ID!): Lifetree
+
+  """
+   Delete multiple Lifetree items by ID.
+  """
+  deleteLifetrees(ids: [ID!]): [Lifetree]
+
+  """
+   Create a single CloudinaryImage item.
+  """
+  createCloudinaryImage(data: CloudinaryImageCreateInput): CloudinaryImage
+
+  """
+   Create multiple CloudinaryImage items.
+  """
+  createCloudinaryImages(data: [CloudinaryImagesCreateInput]): [CloudinaryImage]
+
+  """
+   Update a single CloudinaryImage item by ID.
+  """
+  updateCloudinaryImage(
+    id: ID!
+    data: CloudinaryImageUpdateInput
+  ): CloudinaryImage
+
+  """
+   Update multiple CloudinaryImage items by ID.
+  """
+  updateCloudinaryImages(data: [CloudinaryImagesUpdateInput]): [CloudinaryImage]
+
+  """
+   Delete a single CloudinaryImage item by ID.
+  """
+  deleteCloudinaryImage(id: ID!): CloudinaryImage
+
+  """
+   Delete multiple CloudinaryImage items by ID.
+  """
+  deleteCloudinaryImages(ids: [ID!]): [CloudinaryImage]
+
+  """
+   Create a single Love item.
+  """
+  createLove(data: LoveCreateInput): Love
+
+  """
+   Create multiple Love items.
+  """
+  createLoves(data: [LovesCreateInput]): [Love]
+
+  """
+   Update a single Love item by ID.
+  """
+  updateLove(id: ID!, data: LoveUpdateInput): Love
+
+  """
+   Update multiple Love items by ID.
+  """
+  updateLoves(data: [LovesUpdateInput]): [Love]
+
+  """
+   Delete a single Love item by ID.
+  """
+  deleteLove(id: ID!): Love
+
+  """
+   Delete multiple Love items by ID.
+  """
+  deleteLoves(ids: [ID!]): [Love]
+
+  """
+   Create a single Package item.
+  """
+  createPackage(data: PackageCreateInput): Package
+
+  """
+   Create multiple Package items.
+  """
+  createPackages(data: [PackagesCreateInput]): [Package]
+
+  """
+   Update a single Package item by ID.
+  """
+  updatePackage(id: ID!, data: PackageUpdateInput): Package
+
+  """
+   Update multiple Package items by ID.
+  """
+  updatePackages(data: [PackagesUpdateInput]): [Package]
+
+  """
+   Delete a single Package item by ID.
+  """
+  deletePackage(id: ID!): Package
+
+  """
+   Delete multiple Package items by ID.
+  """
+  deletePackages(ids: [ID!]): [Package]
+
+  """
+   Create a single PackageItem item.
+  """
+  createPackageItem(data: PackageItemCreateInput): PackageItem
+
+  """
+   Create multiple PackageItem items.
+  """
+  createPackageItems(data: [PackageItemsCreateInput]): [PackageItem]
+
+  """
+   Update a single PackageItem item by ID.
+  """
+  updatePackageItem(id: ID!, data: PackageItemUpdateInput): PackageItem
+
+  """
+   Update multiple PackageItem items by ID.
+  """
+  updatePackageItems(data: [PackageItemsUpdateInput]): [PackageItem]
+
+  """
+   Delete a single PackageItem item by ID.
+  """
+  deletePackageItem(id: ID!): PackageItem
+
+  """
+   Delete multiple PackageItem items by ID.
+  """
+  deletePackageItems(ids: [ID!]): [PackageItem]
+
+  """
+   Create a single Present item.
+  """
+  createPresent(data: PresentCreateInput): Present
+
+  """
+   Create multiple Present items.
+  """
+  createPresents(data: [PresentsCreateInput]): [Present]
+
+  """
+   Update a single Present item by ID.
+  """
+  updatePresent(id: ID!, data: PresentUpdateInput): Present
+
+  """
+   Update multiple Present items by ID.
+  """
+  updatePresents(data: [PresentsUpdateInput]): [Present]
+
+  """
+   Delete a single Present item by ID.
+  """
+  deletePresent(id: ID!): Present
+
+  """
+   Delete multiple Present items by ID.
+  """
+  deletePresents(ids: [ID!]): [Present]
+
+  """
+   Create a single Role item.
+  """
+  createRole(data: RoleCreateInput): Role
+
+  """
+   Create multiple Role items.
+  """
+  createRoles(data: [RolesCreateInput]): [Role]
+
+  """
+   Update a single Role item by ID.
+  """
+  updateRole(id: ID!, data: RoleUpdateInput): Role
+
+  """
+   Update multiple Role items by ID.
+  """
+  updateRoles(data: [RolesUpdateInput]): [Role]
+
+  """
+   Delete a single Role item by ID.
+  """
+  deleteRole(id: ID!): Role
+
+  """
+   Delete multiple Role items by ID.
+  """
+  deleteRoles(ids: [ID!]): [Role]
+  authenticateLifeseedWithPassword(
+    email: String!
+    password: String!
+  ): LifeseedAuthenticationWithPasswordResult!
+  createInitialLifeseed(
+    data: CreateInitialLifeseedInput!
+  ): LifeseedAuthenticationWithPasswordSuccess!
+  sendLifeseedPasswordResetLink(
+    email: String!
+  ): SendLifeseedPasswordResetLinkResult
+  redeemLifeseedPasswordResetToken(
+    email: String!
+    token: String!
+    password: String!
+  ): RedeemLifeseedPasswordResetTokenResult
+  addToBasket(presentId: ID): BasketItem
+  createComment(presentId: ID, body: String): Present
+  deleteComment(id: ID): Present
+  love(presentId: ID): Love
+  checkout(token: String!): Package
+  endSession: Boolean!
+}
+
+"""
+The `Upload` scalar type represents a file upload.
+"""
+scalar Upload
+
+union AuthenticatedItem = Lifeseed
+
+union LifeseedAuthenticationWithPasswordResult =
+    LifeseedAuthenticationWithPasswordSuccess
+  | LifeseedAuthenticationWithPasswordFailure
+
+type LifeseedAuthenticationWithPasswordSuccess {
+  sessionToken: String!
+  item: Lifeseed!
+}
+
+type LifeseedAuthenticationWithPasswordFailure {
+  code: PasswordAuthErrorCode!
+  message: String!
+}
+
+enum PasswordAuthErrorCode {
+  FAILURE
+  IDENTITY_NOT_FOUND
+  SECRET_NOT_SET
+  MULTIPLE_IDENTITY_MATCHES
+  SECRET_MISMATCH
+}
+
+input CreateInitialLifeseedInput {
+  name: String
+  email: String
+  password: String
+}
+
+type SendLifeseedPasswordResetLinkResult {
+  code: PasswordResetRequestErrorCode!
+  message: String!
+}
+
+enum PasswordResetRequestErrorCode {
+  IDENTITY_NOT_FOUND
+  MULTIPLE_IDENTITY_MATCHES
+}
+
+type ValidateLifeseedPasswordResetTokenResult {
+  code: PasswordResetRedemptionErrorCode!
+  message: String!
+}
+
+type RedeemLifeseedPasswordResetTokenResult {
+  code: PasswordResetRedemptionErrorCode!
+  message: String!
+}
+
+enum PasswordResetRedemptionErrorCode {
+  FAILURE
+  IDENTITY_NOT_FOUND
+  MULTIPLE_IDENTITY_MATCHES
+  TOKEN_NOT_SET
+  TOKEN_MISMATCH
+  TOKEN_EXPIRED
+  TOKEN_REDEEMED
+}
+
+type Query {
+  """
+   Search for all BasketItem items which match the where clause.
+  """
+  allBasketItems(
+    where: BasketItemWhereInput
+    search: String
+    sortBy: [SortBasketItemsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [BasketItem]
+
+  """
+   Search for the BasketItem item with the matching ID.
+  """
+  BasketItem(where: BasketItemWhereUniqueInput!): BasketItem
+
+  """
+   Perform a meta-query on all BasketItem items which match the where clause.
+  """
+  _allBasketItemsMeta(
+    where: BasketItemWhereInput
+    search: String
+    sortBy: [SortBasketItemsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all Lifeseed items which match the where clause.
+  """
+  allLifeseeds(
+    where: LifeseedWhereInput
+    search: String
+    sortBy: [SortLifeseedsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Lifeseed]
+
+  """
+   Search for the Lifeseed item with the matching ID.
+  """
+  Lifeseed(where: LifeseedWhereUniqueInput!): Lifeseed
+
+  """
+   Perform a meta-query on all Lifeseed items which match the where clause.
+  """
+  _allLifeseedsMeta(
+    where: LifeseedWhereInput
+    search: String
+    sortBy: [SortLifeseedsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all Lifetree items which match the where clause.
+  """
+  allLifetrees(
+    where: LifetreeWhereInput
+    search: String
+    sortBy: [SortLifetreesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Lifetree]
+
+  """
+   Search for the Lifetree item with the matching ID.
+  """
+  Lifetree(where: LifetreeWhereUniqueInput!): Lifetree
+
+  """
+   Perform a meta-query on all Lifetree items which match the where clause.
+  """
+  _allLifetreesMeta(
+    where: LifetreeWhereInput
+    search: String
+    sortBy: [SortLifetreesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all CloudinaryImage items which match the where clause.
+  """
+  allCloudinaryImages(
+    where: CloudinaryImageWhereInput
+    search: String
+    sortBy: [SortCloudinaryImagesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [CloudinaryImage]
+
+  """
+   Search for the CloudinaryImage item with the matching ID.
+  """
+  CloudinaryImage(where: CloudinaryImageWhereUniqueInput!): CloudinaryImage
+
+  """
+   Perform a meta-query on all CloudinaryImage items which match the where clause.
+  """
+  _allCloudinaryImagesMeta(
+    where: CloudinaryImageWhereInput
+    search: String
+    sortBy: [SortCloudinaryImagesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all Love items which match the where clause.
+  """
+  allLoves(
+    where: LoveWhereInput
+    search: String
+    sortBy: [SortLovesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Love]
+
+  """
+   Search for the Love item with the matching ID.
+  """
+  Love(where: LoveWhereUniqueInput!): Love
+
+  """
+   Perform a meta-query on all Love items which match the where clause.
+  """
+  _allLovesMeta(
+    where: LoveWhereInput
+    search: String
+    sortBy: [SortLovesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all Package items which match the where clause.
+  """
+  allPackages(
+    where: PackageWhereInput
+    search: String
+    sortBy: [SortPackagesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Package]
+
+  """
+   Search for the Package item with the matching ID.
+  """
+  Package(where: PackageWhereUniqueInput!): Package
+
+  """
+   Perform a meta-query on all Package items which match the where clause.
+  """
+  _allPackagesMeta(
+    where: PackageWhereInput
+    search: String
+    sortBy: [SortPackagesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all PackageItem items which match the where clause.
+  """
+  allPackageItems(
+    where: PackageItemWhereInput
+    search: String
+    sortBy: [SortPackageItemsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [PackageItem]
+
+  """
+   Search for the PackageItem item with the matching ID.
+  """
+  PackageItem(where: PackageItemWhereUniqueInput!): PackageItem
+
+  """
+   Perform a meta-query on all PackageItem items which match the where clause.
+  """
+  _allPackageItemsMeta(
+    where: PackageItemWhereInput
+    search: String
+    sortBy: [SortPackageItemsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all Present items which match the where clause.
+  """
+  allPresents(
+    where: PresentWhereInput
+    search: String
+    sortBy: [SortPresentsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Present]
+
+  """
+   Search for the Present item with the matching ID.
+  """
+  Present(where: PresentWhereUniqueInput!): Present
+
+  """
+   Perform a meta-query on all Present items which match the where clause.
+  """
+  _allPresentsMeta(
+    where: PresentWhereInput
+    search: String
+    sortBy: [SortPresentsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all Role items which match the where clause.
+  """
+  allRoles(
+    where: RoleWhereInput
+    search: String
+    sortBy: [SortRolesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Role]
+
+  """
+   Search for the Role item with the matching ID.
+  """
+  Role(where: RoleWhereUniqueInput!): Role
+
+  """
+   Perform a meta-query on all Role items which match the where clause.
+  """
+  _allRolesMeta(
+    where: RoleWhereInput
+    search: String
+    sortBy: [SortRolesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  authenticatedItem: AuthenticatedItem
+  validateLifeseedPasswordResetToken(
+    email: String!
+    token: String!
+  ): ValidateLifeseedPasswordResetTokenResult
+  keystone: KeystoneMeta!
+}
+
+type KeystoneMeta {
+  adminMeta: KeystoneAdminMeta!
+}
+
+type KeystoneAdminMeta {
+  enableSignout: Boolean!
+  enableSessionItem: Boolean!
+  lists: [KeystoneAdminUIListMeta!]!
+  list(key: String!): KeystoneAdminUIListMeta
+}
+
+type KeystoneAdminUIListMeta {
+  key: String!
+  itemQueryName: String!
+  listQueryName: String!
+  hideCreate: Boolean!
+  hideDelete: Boolean!
+  path: String!
+  label: String!
+  singular: String!
+  plural: String!
+  description: String
+  initialColumns: [String!]!
+  pageSize: Int!
+  labelField: String!
+  fields: [KeystoneAdminUIFieldMeta!]!
+  initialSort: KeystoneAdminUISort
+  isHidden: Boolean!
+}
+
+type KeystoneAdminUIFieldMeta {
+  path: String!
+  label: String!
+  isOrderable: Boolean!
+  fieldMeta: JSON
+  viewsIndex: Int!
+  customViewsIndex: Int
+  createView: KeystoneAdminUIFieldMetaCreateView!
+  listView: KeystoneAdminUIFieldMetaListView!
+  itemView(id: ID!): KeystoneAdminUIFieldMetaItemView
+}
+
+type KeystoneAdminUIFieldMetaCreateView {
+  fieldMode: KeystoneAdminUIFieldMetaCreateViewFieldMode!
+}
+
+enum KeystoneAdminUIFieldMetaCreateViewFieldMode {
+  edit
+  hidden
+}
+
+type KeystoneAdminUIFieldMetaListView {
+  fieldMode: KeystoneAdminUIFieldMetaListViewFieldMode!
+}
+
+enum KeystoneAdminUIFieldMetaListViewFieldMode {
+  read
+  hidden
+}
+
+type KeystoneAdminUIFieldMetaItemView {
+  fieldMode: KeystoneAdminUIFieldMetaItemViewFieldMode!
+}
+
+enum KeystoneAdminUIFieldMetaItemViewFieldMode {
+  edit
+  read
+  hidden
+}
+
+type KeystoneAdminUISort {
+  field: String!
+  direction: KeystoneAdminUISortDirection!
+}
+
+enum KeystoneAdminUISortDirection {
+  ASC
+  DESC
+}

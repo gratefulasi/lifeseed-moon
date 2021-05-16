@@ -6,8 +6,8 @@ export const Love = list({
   access: {
     create: isSignedIn,
     read: rules.canReadPresents,
-    update: rules.canReadPresents,
-    delete: rules.canReadPresents,
+    update: rules.canManagePresents,
+    delete: rules.canManagePresents,
   },
   ui: {
     hideCreate: (args) => !permissions.canManagePresents(args),

@@ -118,7 +118,6 @@ model Role {
   id                   Int        @id @default(autoincrement())
   name                 String?
   canManagePresents    Boolean?
-  canManageComments    Boolean?
   canSeeOtherLifeseeds Boolean?
   canManageLifeseeds   Boolean?
   canManageRoles       Boolean?

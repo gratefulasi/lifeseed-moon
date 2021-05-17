@@ -1272,7 +1272,6 @@ type Role {
   id: ID!
   name: String
   canManagePresents: Boolean
-  canManageComments: Boolean
   canSeeOtherLifeseeds: Boolean
   canManageLifeseeds: Boolean
   canManageRoles: Boolean
@@ -1327,8 +1326,6 @@ input RoleWhereInput {
   name_not_in: [String]
   canManagePresents: Boolean
   canManagePresents_not: Boolean
-  canManageComments: Boolean
-  canManageComments_not: Boolean
   canSeeOtherLifeseeds: Boolean
   canSeeOtherLifeseeds_not: Boolean
   canManageLifeseeds: Boolean
@@ -1367,8 +1364,6 @@ enum SortRolesBy {
   name_DESC
   canManagePresents_ASC
   canManagePresents_DESC
-  canManageComments_ASC
-  canManageComments_DESC
   canSeeOtherLifeseeds_ASC
   canSeeOtherLifeseeds_DESC
   canManageLifeseeds_ASC
@@ -1384,7 +1379,6 @@ enum SortRolesBy {
 input RoleUpdateInput {
   name: String
   canManagePresents: Boolean
-  canManageComments: Boolean
   canSeeOtherLifeseeds: Boolean
   canManageLifeseeds: Boolean
   canManageRoles: Boolean
@@ -1401,7 +1395,6 @@ input RolesUpdateInput {
 input RoleCreateInput {
   name: String
   canManagePresents: Boolean
-  canManageComments: Boolean
   canSeeOtherLifeseeds: Boolean
   canManageLifeseeds: Boolean
   canManageRoles: Boolean

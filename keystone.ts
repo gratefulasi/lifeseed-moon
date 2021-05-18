@@ -49,7 +49,7 @@ export default withAuth(
       },
     },
     db: {
-      adapter: 'prisma_postgresql',
+      adapter: 'mongoose',
       url: databaseURL,
       async onConnect(keystone) {
         console.log('Connected to the database!');

@@ -33,17 +33,6 @@ export const rules = {
     return { lifeseed: { id: session.itemId } };
   },
 
-  canManageRoles({ session }: ListAccessArgs) {
-    if (!isSignedIn({ session })) {
-      return false;
-    }
-    if (permissions.canManageRoles({ session })) {
-      return true;
-    }
-
-    return { lifeseed: { id: session.itemId } };
-  },
-
   canPackage({ session }: ListAccessArgs) {
     if (!isSignedIn({ session })) {
       return false;

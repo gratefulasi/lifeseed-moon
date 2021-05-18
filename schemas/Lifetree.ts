@@ -5,7 +5,7 @@ import { isSignedIn, rules } from '../access';
 export const Lifetree = list({
   access: {
     create: isSignedIn,
-    read: rules.canReadPresents,
+    read: rules.canReadLifetrees,
     update: rules.canManagePresents,
     delete: rules.canManagePresents,
   },

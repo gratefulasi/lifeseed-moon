@@ -2,7 +2,7 @@ import { checkbox } from '@keystone-next/fields';
 
 export const permissionFields = {
   canManagePresents: checkbox({
-    defaultValue: true,
+    defaultValue: false,
     label: 'present manager',
   }),
   canSeeOtherLifeseeds: checkbox({
@@ -14,7 +14,7 @@ export const permissionFields = {
     label: 'edit lifeseeds',
   }),
   canManageRoles: checkbox({
-    defaultValue: true,
+    defaultValue: false,
     label: 'role manager',
   }),
   canManageBasket: checkbox({

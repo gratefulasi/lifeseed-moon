@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  keystone:
+    image: keystone
+    ports:
+      - 5000
+    restart: always
+
+  keystone-cache:
+    image: memcached

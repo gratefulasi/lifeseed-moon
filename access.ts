@@ -55,6 +55,10 @@ export const rules = {
     return { package: { lifeseed: { id: session.itemId } } };
   },
 
+  canReadLifeseeds({ session }: ListAccessArgs) {
+    return (isSignedIn({ session }));
+  },
+
   canReadLifetrees({ session }: ListAccessArgs) {
     if (!isSignedIn({ session })) {
       return false;

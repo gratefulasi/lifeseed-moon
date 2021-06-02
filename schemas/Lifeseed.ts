@@ -5,7 +5,7 @@ import { permissions, rules } from '../access';
 export const Lifeseed = list({
   access: {
     create: () => true,
-    read: rules.canManageLifeseeds,
+    read: rules.canReadLifeseeds,
     update: rules.canManageLifeseeds,
     delete: permissions.canManageLifeseeds,
   },

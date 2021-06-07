@@ -15,20 +15,23 @@ FROM base AS setup
 RUN apk add --no-cache python make g++ curl bash
 
 # Copying only required files for install command (.npmrc needed for scoped packages)
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Copy over other files needed to run the service.
 # COPY tsconfig.json config.default.json openapi.yml ./
-COPY config.ts tsconfig.json keystone.ts schema.ts schema.graphql schema.prisma ./
-COPY migrations migrations/
+COPY tsconfig.json keystone.ts schema.graphql schema.prisma access.ts .env ./
+COPY schemas schemas/
+COPY lib lib/
+COPY mutations mutations/
+COPY seed-data seed-data/
 
 # Install all dev dependencies (used to build typescript, for docker-compose, etc)
-RUN yarn install --frozen-lockfile
+RUN npm install
 
 # --- Build Stage (image contains NPM credentials, should not be pushed) -------
 FROM setup AS builder
 
-RUN yarn build
+RUN npm build
 
 # Removing `.npmrc`, tsconfig and source files as the last step
 RUN rm -rf tsconfig*.json .npmrc src
@@ -39,10 +42,13 @@ FROM base
 # Copy over everything we've built from the previous image.
 COPY --chown=node:node --from=builder /var/service /var/service
 
+RUN mkdir /var/service/.keystone
+RUN chown node:node /var/service/.keystone
+
 # Switch to the `node` user.
 USER node
 
 EXPOSE 8080
 
 # Set default execution command.
-CMD yarn migrate && yarn start
+CMD npm start

@@ -1,37 +1,20 @@
-version: "3.4"
+version: "3.7"
 services:
-  keystone-api:
+  lifeseed-api:
+    container_name: lifeseed-moon
     build:
-      context: keystone-app
+      context: .
       dockerfile: Dockerfile
     ports: ["8080:8080"]
-    depends_on:
-      - "database"
+    # depends_on:
+    #   - "database"
     # volumes:
     #   - ./src:/var/service/src
-    networks:
-      - bridgenet
+    # networks:
+    #   - bridgenet
     environment:
       NODE_ENV: "production"
       PORT: "8080"
       DATABASE_URL: $DATABASE_URL
       SESSION_SECRET: $SESSION_SECRET
 
-  database:
-    # use latest official postgres version
-    image: "postgres"
-    env_file:
-      # configure postgres
-      - postgres-db/setup.env
-    ports: ["5432:5432"]
-    volumes:
-      # persist data even if container shuts down
-      - database-data:/var/lib/postgresql/data/
-    networks:
-      - bridgenet
-
-networks:
-  bridgenet:
-    name: custom_network
-volumes:
-    database-data:

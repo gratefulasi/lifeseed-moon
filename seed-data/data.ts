@@ -9,7 +9,8 @@ export const presents = [
   {
     name: 'Light',
     body: 'Outdoor',
-    status: 'AVAILABLE',
+    status: 'AVAILABLE',    
     price: 373737,
+    value: 100000,
   },
 ];

@@ -11,7 +11,7 @@ export const Present = list({
   },
   ui: {
     listView: {
-      initialColumns: ['name', 'body', 'price', 'status'],
+      initialColumns: ['name', 'body', 'price', 'value', 'status'],
     },
   },
   fields: {
@@ -69,6 +69,7 @@ export const Present = list({
       },
     }),
     price: integer(),
+    value: integer(),
     lifeseed: relationship({
       ref: 'Lifeseed.presents',
       defaultValue: ({ context }) => ({

@@ -17,6 +17,7 @@ export const PackageItem = list({
       },
     }),
     price: integer(),
+    value: integer(),
     quantity: integer(),
     package: relationship({ ref: 'Package.items' }),
   },

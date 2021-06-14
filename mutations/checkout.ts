@@ -37,6 +37,7 @@ async function checkout(
         present {
           name
           price
+          value
           body
           id
           photo {

@@ -42,6 +42,7 @@ export const Lifetree = list({
     }),
     latitude: text(),
     longitude: text(),
+    planttime: text({ isRequired: true }),
     lifeseed: relationship({
       ref: 'Lifeseed.lifetree',
       defaultValue: ({ context }) => ({

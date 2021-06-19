@@ -3,7 +3,7 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: 'EUR',
 });
 
-export default function formatPrice(cents: number): string {
+export function formatPrice(cents: number): string {
   const euros = cents / 100;
   return formatter.format(euros);
 }

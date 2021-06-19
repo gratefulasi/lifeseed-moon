@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "keystone-next build",
-    "start": "keystone-next",
+    "start": "keystone-next start",
     "dev": "keystone-next",
     "seed-data": "keystone-next --seed-data"
   },

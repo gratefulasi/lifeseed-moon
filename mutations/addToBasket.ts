@@ -14,7 +14,7 @@ async function addToBasket(
   // 1. Query the current lifeseed see if they are signed in
   const sesh = context.session as Session;
   if (!sesh.itemId) {
-    throw new Error('You must be logged in to do this!');
+    throw new Error('Sorry, you must be signed in');
   }
   // 2. Query the current lifeseeds basket
   const allBasketItems = await context.lists.BasketItem.findMany({

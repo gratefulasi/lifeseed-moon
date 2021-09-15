@@ -14,7 +14,7 @@ async function createComment(
 ): Promise<PresentCreateInput> {
   const sesh = context.session as Session;
   if (!sesh?.itemId) {
-    throw new Error("Who would like to do this?");
+    throw new Error("Sorry, you must be signed in");
   }
   const now = new Date().toISOString();
   return await context.lists.Present.createOne({

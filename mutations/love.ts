@@ -16,7 +16,7 @@ async function love(
 ): Promise<PresentCreateInput> {
   const sesh = context.session as Session;
   if (!sesh?.itemId) {
-    throw new Error("Who would like to do this?");
+    throw new Error("Sorry, you must be signed in");
   }
   const love = await context.lists.Love.findMany({
     where: { lifeseed: { id: sesh.itemId }, present: { id: presentId } },
